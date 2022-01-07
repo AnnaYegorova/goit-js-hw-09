@@ -3,6 +3,7 @@ import '../css/common.css';
 import flatpickr from 'flatpickr';
 // Дополнительный импорт стилей
 import 'flatpickr/dist/flatpickr.min.css';
+import { Notify } from 'notiflix';
 
 const btnStart = document.querySelector('button[data-start]');
 btnStart.disabled = true;
@@ -24,14 +25,14 @@ const options = {
     btnStart.addEventListener('click', onBtnStart);
 
     if (selectedDates[0] < dateNow) {
-      alert('Please choose a date in the future');
+      Notify.failure('Please choose a date in the future');
       btnStart.disabled = true;
       return;
     }
     btnStart.disabled = false;
 
     function onBtnStart() {
-      console.log('start обратный отсчет пошел');
+      Notify.success('start обратный отсчет пошел');
 
       const timerId = setInterval(() => {
         const currentTime = Date.now();
@@ -42,7 +43,7 @@ const options = {
         updateClockface(time);
         console.log(`${time.days}:${time.hours}:${time.minutes}:${time.seconds}`);
         if (deltaTime <= 1000) {
-          console.log('FINISH');
+          Notify.success('FINISH');
           clearInterval(timerId);
           return;
         }
