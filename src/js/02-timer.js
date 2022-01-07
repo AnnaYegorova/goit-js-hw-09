@@ -32,6 +32,7 @@ const options = {
     btnStart.disabled = false;
 
     function onBtnStart() {
+      btnStart.disabled = true;
       Notify.success('start обратный отсчет пошел');
 
       const timerId = setInterval(() => {
